@@ -5,7 +5,7 @@ export async function fetchAllCountries() {
     const response = await client
       .from('countries')
       .select('*')
-      .order('country');
+      .order('name');
 
     if (response.error) {
       console.error(`There was an error while retrieving the data, in the try block: ${response.error}`);

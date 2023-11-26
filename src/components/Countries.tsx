@@ -1,47 +1,49 @@
-import { useState, useEffect } from 'react';
-import { fetchAllCountries } from '../services/countries';
 import Header from './Header';
-
-interface CountryPropType {
-  name: string;
-  iso2: string;
-  region: string;
-}
+import { useCountries } from '../hooks/useCountries';
 
 export default function Countries() {
-  const [countries, setCountries] = useState<CountryPropType[]>([]);
-
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const data = await fetchAllCountries();
-        if (data) {
-          setCountries(data);
-        } else {
-          setCountries([]);
-        }
-      } catch (error) {
-        if (error instanceof Error) {
-          console.error(`There was an error while retrieving the data, in the catch block: ${error.message}`);
-        } else {
-          console.error(`There was an error while retrieving the data, that is not an "Error": ${error}`);
-        }
-      }
-    }
-    fetchData();
-  }, []);
+  const {
+    filterCountries,
+    continent,
+    setContinent,
+    error,
+    query,
+    setQuery,
+    loading
+  } = useCountries();
 
   return (
     <>
       <Header />
-      <div>Countries</div>
-      <div>{countries.map((country) => (
-        <div key={country.name}>
-          <div>{country.name}</div>
-          <div>{country.iso2}</div>
-          <div>{country.region}</div>
-        </div>
-      ))}</div>
+      <section className="countries-container">
+        <input
+          type="text"
+          placeholder="Search Countries..."
+          value={query}
+          onChange={(e) => setQuery(e.target.value.toLowerCase())}
+        />
+
+        <select
+          name=""
+          id=""
+          value={continent}
+          onChange={(e) => setContinent(e.target.value)}
+        >
+          <option value="all">All Countries</option>
+          <option value="Africa">Africa</option>
+          <option value="Antarctica">Antarctica</option>
+          <option value="Asia">Asia</option>
+          <option value="Oceania">Oceania</option>
+          <option value="Americas">Americas</option>
+        </select>
+        <span className="error">{error}</span>
+        <main>
+          {loading && <p>Loading...</p>}
+          {!loading && filterCountries().map((country) => (
+            <div key={country.name}>{country.name}</div>
+          ))}
+        </main>
+      </section>
     </>
   )
 }
