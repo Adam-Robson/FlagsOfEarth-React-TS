@@ -1,5 +1,6 @@
 import Header from './Header';
 import { useCountries } from '../hooks/useCountries';
+import Country from './Country';
 
 export default function Countries() {
   const {
@@ -24,8 +25,8 @@ export default function Countries() {
         />
 
         <select
-          name=""
-          id=""
+          name="continent"
+          id="continent"
           value={continent}
           onChange={(e) => setContinent(e.target.value)}
         >
@@ -40,7 +41,11 @@ export default function Countries() {
         <main>
           {loading && <p>Loading...</p>}
           {!loading && filterCountries().map((country) => (
-            <div key={country.name}>{country.name}</div>
+            <Country
+              key={country.id}
+              name={country.name}
+              flag={country.file}
+            />
           ))}
         </main>
       </section>
