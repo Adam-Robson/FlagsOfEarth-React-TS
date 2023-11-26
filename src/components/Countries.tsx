@@ -40,13 +40,15 @@ export default function Countries() {
         <span className="error">{error}</span>
         <main>
           {loading && <p>Loading...</p>}
-          {!loading && filterCountries().map((country) => (
-            <Country
-              key={country.id}
-              name={country.name}
-              flag={country.file}
-            />
-          ))}
+          <section className="flag-grid">
+            {!loading && filterCountries().map((country) => (
+              <Country
+                key={country.id}
+                name={country.name}
+                iso2={country.iso2}
+              />
+            ))}
+          </section>
         </main>
       </section>
     </>
