@@ -7,10 +7,6 @@ export async function fetchAllCountries() {
       .select('*')
       .order('name');
 
-    if (response.error) {
-      console.error(`There was an error while retrieving the data, in the try block: ${response.error}`);
-    }
-
     return response.data;
   } catch (error) {
     if (error instanceof Error) {

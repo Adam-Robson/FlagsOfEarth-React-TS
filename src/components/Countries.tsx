@@ -1,6 +1,9 @@
 import Header from './Header';
 import { useCountries } from '../hooks/useCountries';
 import Country from './Country';
+import type { CountryPropTypes } from '../../database.types'
+
+
 
 export default function Countries() {
   const {
@@ -21,14 +24,18 @@ export default function Countries() {
           type="text"
           placeholder="Search Countries..."
           value={query}
-          onChange={(e) => setQuery(e.target.value.toLowerCase())}
+          onChange={(e) => {
+            setQuery(e.target.value.toLowerCase())
+          }}
         />
         <select
           className="select"
           name="continent"
           id="continent"
           value={continent}
-          onChange={(e) => setContinent(e.target.value)}
+          onChange={(e) => {
+            setContinent(e.target.value)
+          }}
         >
           <option value="all">All Countries</option>
           <option value="Africa">Africa</option>
@@ -41,7 +48,7 @@ export default function Countries() {
         <main>
           {loading && <p>Loading...</p>}
           <section className="flag-grid">
-            {!loading && filterCountries().map((country) => (
+            {!loading && filterCountries().map((country: CountryPropTypes) => (
               <Country
                 key={country.id}
                 {...country}

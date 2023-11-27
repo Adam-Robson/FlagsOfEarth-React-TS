@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
 import { fetchAllCountries } from '../services/countries';
+import { CountryPropTypes } from '../../database.types';
 
 export function useCountries() {
-  const [countries, setCountries] = useState<any[]>([]);
+  const [countries, setCountries] = useState<CountryPropTypes[]>([]);
   const [continent, setContinent] = useState('all');
   const [query, setQuery] = useState('');
   const [loading, setLoading] = useState(false);
@@ -19,8 +20,10 @@ export function useCountries() {
           setCountries([]);
         }
         setLoading(false);
-      } catch (error: any) {
-        setError(error.message)
+      } catch (error) {
+        if (error instanceof Error) {
+          setError(error.message)
+        }
       }
     }
     fetchData();
@@ -28,11 +31,11 @@ export function useCountries() {
 
   function filterCountries() {
     return countries.filter(
-      (country: any) => {
+      (country: CountryPropTypes) => {
         return (continent === 'all'
           ? true
           : country.region === continent) &&
-          country.name.toLowerCase().includes(query);
+          country.name?.toLowerCase().includes(query);
       });
   }
 

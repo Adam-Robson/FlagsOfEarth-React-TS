@@ -1,15 +1,13 @@
 import { useState } from 'react'
+import { CountryPropTypes } from '../../database.types';
 
 export default function Country({
   name,
   iso2
-}: {
-  name: string,
-  iso2: string
-}) {
+}: CountryPropTypes) {
   const [showName, setShowName] = useState(false);
 
-  const iso = iso2.toLowerCase();
+  const iso = iso2?.toLowerCase();
 
   function toggleName() {
     setShowName(!showName);

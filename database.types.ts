@@ -51,10 +51,11 @@ export interface Database {
   }
 }
 
-export type CountryPropTypes = {
+export interface CountryPropTypes {
   id: number
   created_at: string
-  country: string | null
+  name: string | null
   iso2: string | null
   flag: string | null
+  region: string | null
 }
