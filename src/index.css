@@ -38,6 +38,7 @@ body {
   color: var(--foreground);
   background-color: var(--background);
   max-width: 1280px;
+  width: 100%;
   margin: 0 auto;
   padding: 0.5rem;
   text-align: center;
@@ -102,6 +103,7 @@ select:focus-visible {
   min-height: 40rem;
   display: grid;
   grid-template-columns: repeat(10, 1fr);
+  grid-auto-flow: row;
 }
 
 .country-card {
@@ -109,10 +111,17 @@ select:focus-visible {
   padding: .25rem;
   color: var(--foreground);
   z-index: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .country-card:hover {
   cursor: pointer;
+}
+
+.flag {
+  margin: 0.3rem;
+  padding: 0.3rem;
 }
 
 .name {

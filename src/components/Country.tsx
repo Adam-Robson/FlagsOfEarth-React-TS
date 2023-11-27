@@ -18,8 +18,9 @@ export default function Country({
   return (
     <div className='country-card' onClick={toggleName}>
       <img
+        className="flag"
         src={`https://flagcdn.com/${iso}.svg`}
-        width="90"
+        height="44"
         alt={`${name}`}
       />
       <span className={showName ? '' : 'name'}>{name}</span>

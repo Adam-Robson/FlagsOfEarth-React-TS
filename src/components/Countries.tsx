@@ -4,6 +4,8 @@ import Country from './Country';
 
 export default function Countries() {
   const {
+    query,
+    setQuery,
     filterCountries,
     continent,
     setContinent,
@@ -15,6 +17,12 @@ export default function Countries() {
     <>
       <Header />
       <section className="countries-container">
+        <input
+          type="text"
+          placeholder="Search Countries..."
+          value={query}
+          onChange={(e) => setQuery(e.target.value.toLowerCase())}
+        />
         <select
           className="select"
           name="continent"
@@ -36,8 +44,7 @@ export default function Countries() {
             {!loading && filterCountries().map((country) => (
               <Country
                 key={country.id}
-                name={country.name}
-                iso2={country.iso2}
+                {...country}
               />
             ))}
           </section>

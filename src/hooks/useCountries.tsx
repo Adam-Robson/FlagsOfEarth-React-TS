@@ -31,13 +31,12 @@ export function useCountries() {
       (country: any) => {
         return (continent === 'all'
           ? true
-          : country.region === continent)
-      }
-    )
+          : country.region === continent) &&
+          country.name.toLowerCase().includes(query);
+      });
   }
 
   return {
-    countries,
     continent,
     setContinent,
     query,
