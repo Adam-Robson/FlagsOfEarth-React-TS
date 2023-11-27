@@ -8,8 +8,6 @@ export default function Countries() {
     continent,
     setContinent,
     error,
-    query,
-    setQuery,
     loading
   } = useCountries();
 
@@ -17,14 +15,8 @@ export default function Countries() {
     <>
       <Header />
       <section className="countries-container">
-        <input
-          type="text"
-          placeholder="Search Countries..."
-          value={query}
-          onChange={(e) => setQuery(e.target.value.toLowerCase())}
-        />
-
         <select
+          className="select"
           name="continent"
           id="continent"
           value={continent}

@@ -1,5 +1,8 @@
 export default function Header() {
   return (
-    <header>Flags of Earth</header>
+    <header>
+      <div className="title">Countries of Earth</div>
+      <div className="subtitle">by Flag</div>
+    </header>
   )
 }
